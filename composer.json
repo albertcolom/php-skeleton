@@ -1,0 +1,23 @@
+{
+    "name": "albertcolom/php-skeleton",
+    "authors": [
+        {
+            "name": "Albert Colom",
+            "email": "skolom@gmail.com"
+        }
+    ],
+    "require": {
+        "php-di/php-di": "^6.0",
+        "nikic/fast-route": "^1.3"
+    },
+    "autoload": {
+      "psr-4": {
+        "App\\": "src"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "AppTest\\": "test"
+      }
+    }
+}
