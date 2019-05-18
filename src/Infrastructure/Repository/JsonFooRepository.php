@@ -29,12 +29,12 @@ class JsonFooRepository implements FooRepository
         file_put_contents(self::FOO_PATH_JSON_REPOSITORY, json_encode($foo_content));
     }
 
-    public function getAll(): ?array
+    public function getAll(): array
     {
         $file_content = file_get_contents(self::FOO_PATH_JSON_REPOSITORY);
 
         if ('' === $file_content) {
-            return null;
+            return [];
         }
 
         return json_decode($file_content, true);

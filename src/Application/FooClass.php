@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-use App\Domain\Model\FooModel;
-use App\Domain\Repository\FooRepository;
+use App\Domain\Service\CommandBus;
 
 class FooClass
 {
-    /** @var FooRepository */
-    private $fooRepository;
+    /** @var GetAllFoo  */
+    private $getAllFoo;
+    /** @var CommandBus  */
+    private $commandBus;
 
-    public function __construct(FooRepository $fooRepository)
+    public function __construct(GetAllFoo $getAllFoo, CommandBus $commandBus)
     {
-        $this->fooRepository = $fooRepository;
+        $this->commandBus = $commandBus;
+        $this->getAllFoo = $getAllFoo;
     }
 
     public function __invoke()
@@ -24,10 +26,10 @@ class FooClass
 
     public function hello(string $name = 'world')
     {
-        $this->fooRepository->persist(FooModel::create($name));
+        $this->commandBus->handle(new CreateFooCommand($name));
         echo '<h1>☞ Hello ' . $name . '   :-)</h1>';
 
-        $foo_content = $this->fooRepository->getAll();
+        $foo_content = $this->getAllFoo->__invoke();
         var_dump(json_encode($foo_content));
     }
 
