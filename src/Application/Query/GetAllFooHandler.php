@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Application;
+namespace App\Application\Query;
 
 use App\Domain\Repository\FooRepository;
 
-class CreateFoo
+class GetAllFooHandler
 {
-    /** @var FooRepository */
+    /** @var FooRepository  */
     private $fooRepository;
 
     public function __construct(FooRepository $fooRepository)
@@ -16,8 +16,8 @@ class CreateFoo
         $this->fooRepository = $fooRepository;
     }
 
-    public function __invoke(CreateFooCommand $command): void
+    public function __invoke(): array
     {
-        $this->fooRepository->persist($command->foo());
+        return $this->fooRepository->getAll();
     }
 }
