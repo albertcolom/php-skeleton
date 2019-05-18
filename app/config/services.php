@@ -11,7 +11,7 @@ use League\Tactician\Handler\MethodNameInflector\HandleClassNameInflector;
 use Psr\Container\ContainerInterface;
 
 return [
-    'App\Domain\Repository\*Repository' => DI\create('App\Infrastructure\Repository\InMemory*Repository'),
+    'App\Domain\Repository\*Repository' => DI\create('App\Infrastructure\Repository\Json*Repository'),
 
     'command.handler.map' => [
         //'MyCommand' => 'MyCommandHandler',

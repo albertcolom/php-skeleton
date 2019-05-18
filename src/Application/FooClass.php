@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application;
 
+use App\Domain\Model\FooModel;
 use App\Domain\Repository\FooRepository;
 
 class FooClass
@@ -23,8 +24,11 @@ class FooClass
 
     public function hello(string $name = 'world')
     {
-        $fooModel = $this->fooRepository->get($name);
-        echo '<h1>☞ Hello ' . $fooModel->name() . '   :-)</h1>';
+        $this->fooRepository->persist(FooModel::create($name));
+        echo '<h1>☞ Hello ' . $name . '   :-)</h1>';
+
+        $foo_content = $this->fooRepository->getAll();
+        var_dump(json_encode($foo_content));
     }
 
     public function info()
