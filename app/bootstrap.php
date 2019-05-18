@@ -25,11 +25,11 @@ $route = $dispatcher->dispatch($httpMethod, $uri);
 switch ($route[0]) {
     case Dispatcher::NOT_FOUND:
         http_response_code(404);
-        echo '404 Not Found';
+        echo json_encode(['status' => 404, 'data' => 'Not Found']);
         break;
     case Dispatcher::METHOD_NOT_ALLOWED:
         http_response_code(405);
-        echo '405 Method Not Allowed';
+        echo json_encode(['status' => 405, 'data' => ' Method Not Allowed']);
         break;
     case Dispatcher::FOUND:
         $handler = $route[1];
